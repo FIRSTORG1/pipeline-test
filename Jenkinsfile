@@ -1,15 +1,19 @@
 pipeline {
     agent any
-
+	tools { 
+        maven 'maven_3.3.9' 
+        jdk 'JDK_8' 
+    }
     stages {
-        stage('Build') {
+       stage ('Initialize') {
             steps {
-                echo 'Building..'
+	            echo "PATH = ${PATH}"
+	            echo "M2_HOME = ${M2_HOME}"
             }
         }
-        stage('Test') {
+        stage('Build') {
             steps {
-                echo 'Testing..'
+               mvn clean compile install
             }
         }
         stage('Deploy') {
