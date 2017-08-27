@@ -13,7 +13,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-              '${M2_HOME}\bin\mvn clean compile install'
+              bat 'mvn clean compile install'
             }
         }
         stage('Deploy') {
