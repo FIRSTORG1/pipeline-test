@@ -1,5 +1,5 @@
 def maven_phase = "install"
-node('maven_phase == "compile"') {
+node() {
 	def mvn_version = 'maven_3.3.9'
 	stage('Checkout') {
 		checkout scm
