@@ -1,12 +1,14 @@
 node {
+	def mvn_version = 'maven_3.3.9'
 	stage('Checkout') {
 		checkout scm
 	}
-    stage('Compile') {
+    stage('Clean') {
+    	echo 'maven clean'
     	try {
-	    	def mvn_version = 'maven_3.3.9'
+	    	
 			withEnv( ["PATH+MAVEN=${tool mvn_version}/bin"] ) {
-	  			bat "mvn clean compile"
+	  			bat "mvn clean"
 			}
         }
         catch (exc) {
@@ -14,4 +16,19 @@ node {
             throw exc;
         }
     }
+    
+    stage('Compile') {
+    	echo 'maven compile'
+		withEnv( ["PATH+MAVEN=${tool mvn_version}/bin"] ) {
+			bat "mvn compile"
+		}
+    }
+    
+    stage('Install') {
+    	echo 'maven Install'
+		withEnv( ["PATH+MAVEN=${tool mvn_version}/bin"] ) {
+			bat "mvn install"
+		}
+    }
+    
 }
