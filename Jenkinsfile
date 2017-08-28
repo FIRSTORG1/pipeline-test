@@ -2,12 +2,11 @@ def maven_phase = "install"
 node() {
 	def mvn_version = 'maven_3.3.9'
 	stage('Checkout') {
-		checkout scm
+		checkout([$class: 'GitSCM', branches: [[name: '*/dev']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'git_cred', url: 'https://github.com/hclvipin/pipeline-test']]])
 	}
     stage('Clean') {
     	echo 'maven clean'
     	try {
-	    	
 			withEnv( ["PATH+MAVEN=${tool mvn_version}/bin"] ) {
 	  			bat "mvn clean"
 			}
@@ -24,7 +23,12 @@ node() {
 			bat "mvn compile"
 		}
     }
-    
+    stage('Test') {
+    	echo 'maven Test'
+		withEnv( ["PATH+MAVEN=${tool mvn_version}/bin"] ) {
+			bat "mvn test"
+		}
+    }
     stage('Install') {
     	echo 'maven Install'
 		withEnv( ["PATH+MAVEN=${tool mvn_version}/bin"] ) {

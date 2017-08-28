@@ -8,6 +8,14 @@
 		<jdk.version>1.8</jdk.version>
 		<source.encoding>UTF-8</source.encoding>
 	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 	<build>
 		<pluginManagement>
 			<plugins>
