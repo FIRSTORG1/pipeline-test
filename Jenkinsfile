@@ -1,5 +1,5 @@
 def maven_phase = "install"
-node() {
+node {
 	def mvn_version = 'maven_3.3.9'
 	stage('Checkout') {
 		checkout([$class: 'GitSCM', branches: [[name: '*/dev']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'git_cred', url: 'https://github.com/hclvipin/pipeline-test']]])
