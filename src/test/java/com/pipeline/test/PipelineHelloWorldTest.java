@@ -10,6 +10,7 @@ public class PipelineHelloWorldTest {
 	public void test() {
 		PipelineHelloWorld.main(null);
 		assertEquals(true, true);
+		
 	}
 
 }
